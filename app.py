@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from forms import LoginForm
 from services import settings
+from models import Job
 
 
 app = Flask(__name__)
@@ -8,11 +9,11 @@ app = Flask(__name__)
 @app.route('/')
 def index():
 	apps = Index.query.all()
-	form = LoginForm()
+	form = JobForm()
 	return render_template('index.html', **locals())
 
 @app.route('/apps/create/', methods=['POST', 'GET'])
-def create_app_view():
+def create_index_view():
 	form = CreateLoginForm()
 	if request.method == 'POST' and form.validate_on_submit():
 		obj = settings.create_app(**form.data)
@@ -22,9 +23,9 @@ def create_app_view():
 	return render_template('index.html', **locals())
 
 @app.route('/apps/update/<int:id>', methods=['POST', 'GET'])
-def update_app_view(id):
+def update_index_view(id):
 	application = App.query.get(id)
-	form = LoginForm(obj=application)
+	form = JobForm(obj=application)
 	if request.method == 'POST' and form.validate_on_submit():
 		obj = settings.update_app(application.id, **form.data)
 		print obj.name

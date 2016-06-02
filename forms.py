@@ -4,7 +4,7 @@ from wtforms import *
 from wtforms.fields.html5 import EmailField
 
 
-class LoginForm(Form):
+class JobForm(Form):
     project_name = StringField("To get us started, let's give your project a name", validators=[DataRequired()], description="test")
     mobile_or_name_website = TextField("Is it a Mobile App or Website", validators=[DataRequired()])
     describe_purpose = TextAreaField("Please describe the purpose of this project", validators=[DataRequired()])  

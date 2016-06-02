@@ -1,7 +1,7 @@
 import datetime
 
 
-class User(db.Model):
+class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     your_name = db.Column(db.String(150), nullable=False)
     project_name = db.Column(db.String, nullable=False)
@@ -15,4 +15,4 @@ class User(db.Model):
     email_address = db.Column(db.String(150), unique=True)
 
     def __repr__(self):
-        return '<User %r>' % self.name
+        return '<Job %r>' % self.name
