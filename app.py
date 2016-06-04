@@ -1,16 +1,23 @@
+# import core python modules
 import datetime
 
+# import flask and its extensions
 from flask import Flask, render_template, request, redirect
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
+# import application modules
+import config
 from forms import JobForm
 from services import settings
 
+# initializing flask application and database
 app = Flask(__name__)
 db = SQLAlchemy(app)
+app.config.from_object(config)
 
 
+# setting up model objects
 class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     your_name = db.Column(db.String(150), nullable=False)
@@ -28,6 +35,7 @@ class Job(db.Model):
         return '<Job %r>' % self.name
 
 
+# setting up application views
 @app.route('/')
 def index():
     form = JobForm()
