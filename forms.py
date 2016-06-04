@@ -1,12 +1,12 @@
 from flask.ext.wtf import Form
-from wtforms.validators import DataRequired
+from wtforms.validators import *
 from wtforms import *
 from wtforms.fields.html5 import EmailField
 
 
 class JobForm(Form):
-    project_name = StringField("To get us started, let's give your project a name", validators=[DataRequired()], description="test")
-    mobile_or_name_website = TextField("Is it a Mobile App or Website", validators=[DataRequired()])
+    project_name = StringField("To get us started, let's give your project a name", validators=[DataRequired('This field is required')], description="test")
+    mobile_or_name_website = TextField("Is it a Mobile App or Website", validators=[DataRequired('This field is required')])
     describe_purpose = TextAreaField("Please describe the purpose of this project", validators=[DataRequired()])  
     website_design = TextField("Are there any website with design that you like", validators=[DataRequired()])  
     project_budget = IntegerField("What is the budget of this project", validators=[DataRequired()])  

@@ -61,61 +61,91 @@
 						<h2> <a name="project_form">Tell Us About Your Project</a></h2>
 						<div class="row">
 							<div class="12u 12u$(small)">
-								<form method="POST" action="">
+								<form method="POST" action="{{request.path}}">
 									<div class="row uniform 50%">
 										<div class="6u 12u$(xsmall)">
 											<span class="question_span">{{ form.project_name.label }}</span>
 											{{ form.project_name }}
+											{% for message in form.project_name.errors %} 
+						 						<span class="flash">{{ message }}</span> 
+						 					{% endfor %}
 										</div>
 
 										<div class="6u 12u$(xsmall)">
 											<span class="question_span">{{ form.mobile_or_name_website.label }}</span>
 											{{ form.mobile_or_name_website }}
+											{% for message in form.mobile_or_name_website.errors %} 
+						 						<span class="flash">{{ message }}</span> 
+						 					{% endfor %}
 										</div>
 
 										<div class="12u$">
 											<span class="question_span">{{ form.describe_purpose.label }}</span>
 											{{ form.describe_purpose }}
+											{% for message in form.describe_purpose.errors %} 
+						 						<span class="flash">{{ message }}</span> 
+						 					{% endfor %}
 										</div>
 
 										<div class="6u 12u$(xsmall)">
 											<span class="question_span">{{ form.website_design.label }}</span>
 											{{ form.website_design }}
+											{% for message in form.website_design.errors %} 
+						 						<span class="flash">{{ message }}</span> 
+						 					{% endfor %}
 										</div>
 
 										<div class="6u 12u$(xsmall)">
 											<span class="question_span">{{ form.project_budget.label }}</span>
 											{{ form.project_budget }}
+											{% for message in form.project_budget.errors %} 
+						 						<span class="flash">{{ message }}</span> 
+						 					{% endfor %}
 										</div>
 
 										<div class="6u 12u$(xsmall)">
 											<span class="question_span">{{ form.project_deadline.label }}</span>
 											{{ form.project_deadline }}
+											{% for message in form.project_deadline.errors %} 
+						 						<span class="flash">{{ message }}</span> 
+						 					{% endfor %}
 										</div>
 
 										<div class="6u 12u$(xsmall)">
 											<span class="question_span">{{ form.your_name.label }}</span>
 											{{ form.your_name }}
+											{% for message in form.your_name.errors %} 
+						 						<span class="flash">{{ message }}</span> 
+						 					{% endfor %}
 										</div>
 
 										<div class="6u 12u$(xsmall)">
 											<span class="question_span">{{ form.phone_number.label }}</span>
 											{{ form.phone_number }}
+											{% for message in form.phone_number.errors %} 
+						 						<span class="flash">{{ message }}</span> 
+						 					{% endfor %}
 										</div>
 
 										<div class="6u 12u$(xsmall)">
 											<span class="question_span">{{ form.email_address.label }}</span>
 											{{ form.email_address }}
+											{% for message in form.email_address.errors %} 
+						 						<span class="flash">{{ message }}</span> 
+						 					{% endfor %}
 										</div>
 
 										<div class="12u 12u$(xsmall)">
 											<span class="question_span">{{ form.finished_project.label }}</span>
 											{{ form.finished_project }}
+											{% for message in form.finished_project.errors %} 
+						 						<span class="flash">{{ message }}</span> 
+						 					{% endfor %}
 										</div>
 									</div>
 								</form>
 								<ul class="actions">
-									<li><input type="submit" value="SUBMIT" /></li>
+									<li><a href="{{url_for('index')}}"><input type="submit" value="SUBMIT" /></a></li>
 								</ul>
 							</div>
 							<!-- <div class="4u$ 12u$(small)">

@@ -19,16 +19,16 @@ app.config.from_object(config)
 
 class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    your_name = db.Column(db.String(150), nullable=False)
-    project_name = db.Column(db.String, nullable=False)
+    project_name = db.Column(db.String(150), nullable=False)
+    mobile_or_name_website = db.Column(db.String, nullable=False)
     describe_purpose = db.Column(db.String, nullable=False)
     website_design = db.Column(db.String, nullable=False)
     project_budget = db.Column(db.Text, nullable=False)
     project_deadline = db.Column(db.String, nullable=False)
-    finished_project = db.Column(db.String, nullable=False)
+    your_name = db.Column(db.String, nullable=False)
     phone_number = db.Column(db.Text, nullable=False)
-    mobile_or_name_website = db.Column(db.String, nullable=False)
-    email_address = db.Column(db.String(150), unique=True)
+    email_address = db.Column(db.String, nullable=False)
+    finished_project = db.Column(db.String(150), unique=True)
 
     def __repr__(self):
         return '<Job %r>' % self.name
@@ -79,13 +79,28 @@ def delete_request(request_id):
 @app.route('/', methods=["GET", "POST"])
 def index():
     form = JobForm()
-    if request.method == "POST" and form.validate():
-        return create_request(**form.data)
+    if request.method == "POST" and form.validate_on_submit():
+        obj = create_request(**form.data)
+        flash('Application has been added successfully')
+        if obj:
+            return redirect(url_for('content_list'))
+    return render_template('index.html', **locals())
 
     print "+++++", form.errors
 
-    return render_template('index.html', **locals())
+
+@app.route('/index/content_list')
+def content_list():
+    job_request = Job.query.all()
+    return render_template('content_list.html', **locals())
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route('/index/delete/<int:id>', methods=['POST'])
+def delete_index_view(id):
+    job_request = Job.query.get(id)
+    delete_index(job_request.id) 
+    flash('Deleted')
+    return redirect(url_for('content_list'))

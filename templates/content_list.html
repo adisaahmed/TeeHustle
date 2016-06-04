@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Admin Panel</title>
+	</head>
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<th>Handle</th>
+					<th>Project Name</th>
+					<th>Website/Mobile</th>
+					<th>Project Purpose</th>
+					<th>Similar website</th>
+					<th>Project Budget</th>
+					<th>Project Deadline</th>
+					<th>Name</th>
+					<th>Phone Number</th>
+					<th>Email Address</th>
+					<th>Envision</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for content in contents %}
+					<tr>
+						<td>{{ content.handle }} </td>
+						<td>{{ content.project_name }}</td>
+						<td>{{ content.mobile_or_name_website }}</td>
+						<td>{{ content.describe_purpose }}</td>
+						<td>{{ content.website_design }}</td>
+						<td>{{ content.project_budget }}</td>
+						<td>{{ content.project_deadline }}</td>
+						<td>{{ content.your_name }}</td>
+						<td>{{ content.phone_number }}</td>
+						<td>{{ content.email_address }}</td>
+						<td>{{ content.finished_project }}</td>
+						<th><button onclick="getConfirmation({{content.id}})">Delete</button></th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+	</html>
+{% endblock %}
+
+{% block script_js %}
+<script type="text/javascript">
+
+    function  getConfirmation(content_id){
+        var url = 'http://' + '{{request.host}}' + '/apps/delete/' + content_id
+        var job_request = confirm('Are you sure to delete?  Press Ok');
+        if (job_request == true){
+            $.post(url, {}, function(data, success){
+                location.reload()
+            });
+        }
+    }  
+
+</script>
+{% endblock %}
